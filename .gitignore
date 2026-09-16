@@ -97,3 +97,6 @@ Temporary Items
 
 # Snippets
 snippets/
+
+# Local scratch (downloaded build artifacts, not for commit)
+.working/
