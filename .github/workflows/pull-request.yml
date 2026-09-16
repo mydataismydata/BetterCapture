@@ -14,6 +14,7 @@ on:
 env:
   APP_NAME: BetterCapture
   SCHEME: BetterCapture
+  CONFIGURATION: Release
   XCODE_VERSION: '26.0'
 
 jobs:
@@ -56,7 +57,7 @@ jobs:
           xcodebuild build \
             -project "${{ env.APP_NAME }}.xcodeproj" \
             -scheme "${{ env.SCHEME }}" \
-            -configuration Debug \
+            -configuration "${{ env.CONFIGURATION }}" \
             -destination "platform=macOS" \
             -derivedDataPath build \
             CODE_SIGN_IDENTITY="-" \
@@ -66,7 +67,7 @@ jobs:
       - name: Package application
         run: |
           ditto -c -k --keepParent \
-            "build/Build/Products/Debug/${{ env.APP_NAME }}.app" \
+            "build/Build/Products/${{ env.CONFIGURATION }}/${{ env.APP_NAME }}.app" \
             "${{ env.APP_NAME }}.zip"
 
       - name: Upload application
